@@ -10,6 +10,10 @@ export const {
   LOG_FORMAT,
   LOG_DIR,
   JWT_ACCESS_SECRET,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_CLIENT_EMAIL,
+  FIREBASE_PRIVATE_KEY,
+  FIREBASE_DATABASE_URL,
 } = cleanEnv(process.env, {
   NODE_ENV: str(),
   PORT: port(),
@@ -18,4 +22,8 @@ export const {
   LOG_FORMAT: str(),
   LOG_DIR: str(),
   JWT_ACCESS_SECRET: str(),
+  FIREBASE_PROJECT_ID: str(),
+  FIREBASE_CLIENT_EMAIL: str(),
+  FIREBASE_PRIVATE_KEY: str(),
+  FIREBASE_DATABASE_URL: str(),
 });

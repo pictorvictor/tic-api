@@ -7,6 +7,7 @@ import { LOG_FORMAT, NODE_ENV, PORT } from './utils/env';
 import { errorMiddleware } from './utils/middlewares/error.middleware';
 import { logger, stream } from './utils/logger';
 import { Routes } from './utils/interfaces/routes.interface';
+import FirebaseAdmin from './firebase';
 
 export class App {
   public app: Application;
@@ -60,7 +61,14 @@ export class App {
   };
 
   private connectDatabase = async () => {
-    console.log('Connecting to database...');
+    try {
+      const db = FirebaseAdmin.firebase.firestore();
+      const testDocRef = db.collection('test').doc('testDoc');
+      await testDocRef.get();
+      logger.info('Firebase connection test successful');
+    } catch (error) {
+      logger.error('Failed to connect to Firebase', error);
+    }
   };
 
   private initializeErrorHandling = () => {
