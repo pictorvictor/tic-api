@@ -5,7 +5,67 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"Track": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"url"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Album": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"artist": {
+						"type": "string"
+					},
+					"genre": {
+						"type": "string"
+					},
+					"image": {
+						"type": "string"
+					},
+					"tracks": {
+						"items": {
+							"$ref": "#/components/schemas/Track"
+						},
+						"type": "array"
+					},
+					"downloadUrl": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"artist",
+					"genre",
+					"image",
+					"tracks",
+					"downloadUrl"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
 		"securitySchemes": {
 			"token": {
 				"type": "http",
@@ -24,6 +84,35 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/api/albums": {
+			"get": {
+				"operationId": "GetAlbums",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Album"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Albums"
+				],
+				"security": [
+					{
+						"token": []
+					}
+				],
+				"parameters": []
+			}
+		},
 		"/api/testing/health-check": {
 			"get": {
 				"operationId": "GetHealthCheck",

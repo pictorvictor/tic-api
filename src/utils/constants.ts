@@ -3,6 +3,12 @@ export const SUCCESS_MESSAGE = 'SUCCESS';
 export const ROUTES = {
   testing: {
     healthCheck: '/testing/health-check',
+  },
+  albums: {
+    getAlbums: '/albums',
+    createAlbum: '/albums',
+    updateAlbum: '/albums/:id',
+    deleteAlbum: '/albums/:id',
   }
 };
 

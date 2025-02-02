@@ -2,12 +2,10 @@ import { NextFunction, Response } from 'express';
 import { CUSTOM_ERROR_MESSAGES } from '../constants';
 import { HttpException } from '../http-exception';
 import { getTokenFromRequest } from '../functions/auth.helpers';
-import jwt from 'jsonwebtoken';
-import { JWT_ACCESS_SECRET } from '../env';
 import {
-  JwtPayloadWithUser,
   RequestWithUser,
 } from '../interfaces/auth.interface';
+import FirebaseAdmin from '../../firebase';
 
 export const authMiddleware = async (
   req: RequestWithUser,
@@ -20,12 +18,14 @@ export const authMiddleware = async (
   }
   let payload;
   try {
-    payload = jwt.verify(token, JWT_ACCESS_SECRET) as JwtPayloadWithUser;
+    payload = await FirebaseAdmin.firebase.auth().verifyIdToken(token);
   } catch (e) {
     return next(new HttpException(CUSTOM_ERROR_MESSAGES.FORBIDDEN, 403));
   }
+  const user = {
+    userId: payload.user_id,
+  }
 
-  const { user } = payload;
   req.user = user;
 
   return next();

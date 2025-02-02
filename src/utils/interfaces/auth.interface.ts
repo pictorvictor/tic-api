@@ -1,4 +1,3 @@
-import { UserRole } from '@prisma/client';
 import { Request } from 'express';
 import { JwtPayload } from 'jsonwebtoken';
 
@@ -7,8 +6,7 @@ export interface RequestWithUser extends Request {
 }
 
 export interface UserInfo {
-  id: string;
-  role: UserRole;
+  userId: string;
 }
 
 export interface JwtPayloadWithUser extends JwtPayload {
