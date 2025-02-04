@@ -21,11 +21,12 @@ const seed = async () => {
     title: faker.lorem.words(2),
     artist: faker.person.fullName(),
     genre: faker.music.genre(),
-    image: faker.image.url(),
+    image: faker.image.url({ width: 300, height: 200 }),
     tracks: Array.from({ length: faker.number.int({ min: 3, max: 7 }) }, () => ({
       id: faker.string.uuid(),
       title: faker.lorem.words(2),
-      url: faker.internet.url(),
+    //   url: faker.internet.url(),
+      url: "https://firebasestorage.googleapis.com/v0/b/camp-band.firebasestorage.app/o/Dani%20Mocanu%20-%20Domn%20Judecator%20%EF%BD%9C%20Official%20Video.mp3?alt=media&token=18685a80-be38-4352-b85a-b44f4255beff",
     })) as Track[],
     downloadUrl: faker.internet.url(),
   }));

@@ -7,8 +7,9 @@ export const ROUTES = {
   albums: {
     getAlbums: '/albums',
     createAlbum: '/albums',
-    updateAlbum: '/albums/:id',
-    deleteAlbum: '/albums/:id',
+    updateAlbum: '/albums/:albumId',
+    deleteAlbum: '/albums/:albumId',
+    getUserAlbums: '/albums/user',
   }
 };
 
